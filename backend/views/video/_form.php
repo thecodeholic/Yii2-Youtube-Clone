@@ -23,7 +23,8 @@ use yii\bootstrap4\ActiveForm;
             <div class="form-group">
                 <label>Thumbnail</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input<?php echo $model->hasErrors('thumbnail') ? ' is-invalid' : ''?>"
+                    <input type="file"
+                           class="custom-file-input<?php echo $model->hasErrors('thumbnail') ? ' is-invalid' : '' ?>"
                            id="thumbnail" name="thumbnail">
                     <label class="custom-file-label" for="thumbnail">Choose file</label>
                     <div class="invalid-feedback"><?php echo $model->getFirstError('thumbnail') ?></div>
@@ -40,7 +41,10 @@ use yii\bootstrap4\ActiveForm;
         </div>
         <div class="col-sm-4">
             <div class="embed-responsive embed-responsive-16by9">
-                <video class="embed-responsive-item" src="<?php echo $model->getVideoUrl() ?>" controls></video>
+                <video class="embed-responsive-item"
+                       poster="<?php echo $model->getThumbnailUrl() ?>"
+                       src="<?php echo $model->getVideoUrl() ?>" controls>
+                </video>
             </div>
             <p class="mt-3">
                 <a href="<?php echo $model->getVideoUrl() ?>" target="_blank">
