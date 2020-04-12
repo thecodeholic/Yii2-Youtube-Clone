@@ -95,6 +95,8 @@ class Video extends \yii\db\ActiveRecord
         $isInsert = $this->isNewRecord;
         if ($isInsert) {
             $this->video_id = Yii::$app->security->generateRandomString(16);
+            $this->video_name = $this->video->name;
+            $this->title = $this->video->name;
         }
         $result = parent::save($runValidation, $attributeNames);
 

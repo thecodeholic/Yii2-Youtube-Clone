@@ -32,7 +32,7 @@ use yii\bootstrap4\ActiveForm;
                 </a>
             </p>
             <p class="mt-3">
-                <small>Video name</small>
+                <small>Video name</small><br>
                 <?php echo $model->video_name ?>
             </p>
         </div>
