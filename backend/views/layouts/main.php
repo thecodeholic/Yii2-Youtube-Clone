@@ -58,14 +58,19 @@ AppAsset::register($this);
 
     <main class="d-flex">
         <aside style="min-width: 200px;">
-            <div class="list-group">
-                <a href="/dashboard/index" class="list-group-item list-group-item-action">
-                    Dashboard
-                </a>
-                <a href="/video/index" class="list-group-item list-group-item-action">
-                    Videos
-                </a>
-            </div>
+            <?php echo Nav::widget([
+                'options' => ['class' => 'nav-pills flex-column'],
+                'items' => [
+                    [
+                        'label' => 'Dashboard',
+                        'url' => ['/site/index']
+                    ],
+                    [
+                        'label' => 'Videos',
+                        'url' => ['/video/index']
+                    ],
+                ]
+            ]) ?>
         </aside>
 
         <div class="content-wrapper p-3" style="flex: 1">
