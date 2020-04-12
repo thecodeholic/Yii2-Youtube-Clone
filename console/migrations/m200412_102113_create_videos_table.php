@@ -16,7 +16,6 @@ class m200412_102113_create_videos_table extends Migration
     public function safeUp()
     {
         $this->createTable('{{%videos}}', [
-            'id' => $this->primaryKey(),
             'video_id' => $this->string(32),
             'title' => $this->string(2000),
             'description' => $this->text(),
@@ -27,6 +26,8 @@ class m200412_102113_create_videos_table extends Migration
             'updated_at' => $this->integer(11),
             'created_by' => $this->integer(11),
         ]);
+
+        $this->addPrimaryKey('PK_videos_video_id', '{{%videos}}', 'video_id');
 
         // creates index for column `created_by`
         $this->createIndex(
