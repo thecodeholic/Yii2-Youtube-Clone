@@ -47,7 +47,7 @@ class VideoController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Video::find()->andWhere(['created_by' => Yii::$app->user->id]),
+            'query' => Video::find()->byUser(Yii::$app->user->id)->latest(),
         ]);
 
         return $this->render('index', [

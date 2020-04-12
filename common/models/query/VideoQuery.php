@@ -31,4 +31,14 @@ class VideoQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+
+    public function byUser($userId)
+    {
+        return $this->andWhere(['created_by' => $userId]);
+    }
+
+    public function latest()
+    {
+        return $this->orderBy(['created_at' => SORT_DESC]);
+    }
 }
