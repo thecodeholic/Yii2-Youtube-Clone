@@ -35,7 +35,7 @@ class Video extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['video_id'], 'required'],
+//            [['video_id'], 'required'],
             [['description', 'tags'], 'string'],
             [['status', 'created_at', 'updated_at', 'created_by'], 'integer'],
             [['video_id'], 'string', 'max' => 32],
@@ -81,5 +81,14 @@ class Video extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \common\models\query\VideoQuery(get_called_class());
+    }
+
+    public function save($runValidation = true, $attributeNames = null)
+    {
+        $isInsert = $this->isNewRecord;
+        if ($isInsert){
+            $this->video_id = Yii::$app->security->generateRandomString(16);
+        }
+        return parent::save($runValidation, $attributeNames);
     }
 }
