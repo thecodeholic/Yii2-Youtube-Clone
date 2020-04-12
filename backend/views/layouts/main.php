@@ -43,7 +43,7 @@ AppAsset::register($this);
                     </li>
                 <?php else: ?>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Create</a>
+                        <a class="nav-link" href="#videoModal" data-toggle="modal">Create</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/site/logout']) ?>"
@@ -55,6 +55,25 @@ AppAsset::register($this);
             </ul>
         </div>
     </nav>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="d-flex">
         <aside style="min-width: 200px;">
