@@ -26,6 +26,15 @@ use yii\bootstrap4\ActiveForm;
             <div class="embed-responsive embed-responsive-16by9">
                 <video class="embed-responsive-item" src="<?php echo $model->getVideoUrl() ?>" controls></video>
             </div>
+            <p class="mt-3">
+                <a href="<?php echo $model->getVideoUrl() ?>" target="_blank">
+                    Open Video
+                </a>
+            </p>
+            <p class="mt-3">
+                <small>Video name</small>
+                <?php echo $model->video_name ?>
+            </p>
         </div>
     </div>
 
