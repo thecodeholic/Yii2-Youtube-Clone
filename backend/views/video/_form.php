@@ -19,8 +19,6 @@ use yii\bootstrap4\ActiveForm;
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
             <?= $form->field($model, 'tags')->textInput() ?>
-
-            <?= $form->field($model, 'status')->textInput() ?>
         </div>
         <div class="col-sm-4">
             <div class="embed-responsive embed-responsive-16by9">
@@ -35,6 +33,8 @@ use yii\bootstrap4\ActiveForm;
                 <small>Video name</small><br>
                 <?php echo $model->video_name ?>
             </p>
+
+            <?= $form->field($model, 'status')->textInput() ?>
         </div>
     </div>
 

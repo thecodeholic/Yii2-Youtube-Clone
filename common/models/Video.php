@@ -22,6 +22,9 @@ use yii\helpers\FileHelper;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    const STATUS_PUBLISHED = 1;
+    const STATUS_UNLISTED = 0;
+
     /**
      * @var \yii\web\UploadedFile
      */
@@ -49,7 +52,8 @@ class Video extends \yii\db\ActiveRecord
             [['video_name'], 'string', 'max' => 255],
             [['video_id'], 'unique'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            ['video', 'file', 'extensions' => ['mp4']]
+            ['video', 'file', 'extensions' => ['mp4']],
+            ['status', 'default', 'value' => self::STATUS_UNLISTED]
         ];
     }
 
