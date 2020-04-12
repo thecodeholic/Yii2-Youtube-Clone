@@ -22,6 +22,7 @@ class m200412_102113_create_videos_table extends Migration
             'tags' => $this->text(),
             'status' => $this->tinyInteger(),
             'video_name' => $this->string(255),
+            'has_thumbnail' => $this->boolean(),
             'created_at' => $this->integer(11),
             'updated_at' => $this->integer(11),
             'created_by' => $this->integer(11),

@@ -14,6 +14,7 @@ use yii\helpers\FileHelper;
  * @property string|null $tags
  * @property int|null    $status
  * @property string|null $video_name
+ * @property int|null $has_thumbnail
  * @property int|null    $created_at
  * @property int|null    $updated_at
  * @property int|null    $created_by
@@ -46,7 +47,7 @@ class Video extends \yii\db\ActiveRecord
         return [
 //            [['video_id'], 'required'],
             [['description', 'tags'], 'string'],
-            [['status', 'created_at', 'updated_at', 'created_by'], 'integer'],
+            [['status', 'has_thumbnail', 'created_at', 'updated_at', 'created_by'], 'integer'],
             [['video_id'], 'string', 'max' => 32],
             [['title'], 'string', 'max' => 2000],
             [['video_name'], 'string', 'max' => 255],
