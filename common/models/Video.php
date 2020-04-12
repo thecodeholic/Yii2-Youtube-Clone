@@ -32,6 +32,11 @@ class Video extends \yii\db\ActiveRecord
     public $video = null;
 
     /**
+     * @var \yii\web\UploadedFile
+     */
+    public $thumbnail = null;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -54,6 +59,7 @@ class Video extends \yii\db\ActiveRecord
             [['video_id'], 'unique'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             ['video', 'file', 'extensions' => ['mp4']],
+            ['thumbnail', 'image'],
             ['status', 'default', 'value' => self::STATUS_UNLISTED]
         ];
     }
@@ -110,6 +116,8 @@ class Video extends \yii\db\ActiveRecord
             $this->video_id = Yii::$app->security->generateRandomString(16);
             $this->video_name = $this->video->name;
             $this->title = $this->video->name;
+        } else if ($this->thumbnail) {
+            $this->has_thumbnail = 1;
         }
         $result = parent::save($runValidation, $attributeNames);
 
@@ -122,6 +130,14 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($videoPath));
             }
             $this->video->saveAs($videoPath);
+        } else {
+            if ($this->thumbnail) {
+                $thumbnailPath = Yii::getAlias('@frontend/web/storage/thumb/' . $this->video_id . '.jpg');
+                if (!is_dir(dirname($thumbnailPath))) {
+                    FileHelper::createDirectory(dirname($thumbnailPath));
+                }
+                $this->thumbnail->saveAs($thumbnailPath);
+            }
         }
 
         return $result;
