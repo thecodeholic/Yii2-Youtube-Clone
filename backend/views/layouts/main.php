@@ -27,7 +27,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="<?php echo Yii::$app->homeUrl ?>"><?php echo Yii::$app->name ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -56,18 +56,24 @@ AppAsset::register($this);
         </div>
     </nav>
 
-    <div class="container">
-        <?= $content ?>
-    </div>
+    <main class="d-flex">
+        <aside style="min-width: 200px;">
+            <div class="list-group">
+                <a href="/dashboard/index" class="list-group-item list-group-item-action">
+                    Dashboard
+                </a>
+                <a href="/video/index" class="list-group-item list-group-item-action">
+                    Videos
+                </a>
+            </div>
+        </aside>
+
+        <div class="content-wrapper p-3" style="flex: 1">
+            <?= $content ?>
+        </div>
+    </main>
+
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
