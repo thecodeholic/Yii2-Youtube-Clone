@@ -23,8 +23,10 @@ use yii\bootstrap4\ActiveForm;
             <div class="form-group">
                 <label>Thumbnail</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
+                    <input type="file" class="custom-file-input<?php echo $model->hasErrors('thumbnail') ? ' is-invalid' : ''?>"
+                           id="thumbnail" name="thumbnail">
                     <label class="custom-file-label" for="thumbnail">Choose file</label>
+                    <div class="invalid-feedback"><?php echo $model->getFirstError('thumbnail') ?></div>
                 </div>
             </div>
 
