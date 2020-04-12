@@ -17,6 +17,15 @@ use yii\bootstrap4\ActiveForm;
 
     <div class="row">
         <div class="col-sm-8">
+
+            <div class="form-group">
+                <label>Thumbnail</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
+                    <label class="custom-file-label" for="thumbnail">Choose file</label>
+                </div>
+            </div>
+
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
