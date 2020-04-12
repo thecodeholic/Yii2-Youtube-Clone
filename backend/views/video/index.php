@@ -31,15 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 }
             ],
-            'title',
-            'description:ntext',
-            'tags:ntext',
-            'status',
+            [
+                'attribute' => 'status',
+                'content' => function ($model) {
+                    return \common\models\Video::getStatusLabels()[$model->status];
+                }
+            ],
             //'video_name',
-            //'created_at',
-            //'updated_at',
-            //'created_by',
-
+            'created_at:datetime',
+            'updated_at:datetime',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
