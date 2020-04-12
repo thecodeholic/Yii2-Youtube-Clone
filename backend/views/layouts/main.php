@@ -22,6 +22,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
     <?php $this->head() ?>
 </head>
 <body>
@@ -60,16 +61,28 @@ AppAsset::register($this);
     <!-- Modal -->
     <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
+                    <div class="upload-icon mb-4">
+                        <i class="fas fa-upload"></i>
+                    </div>
 
+                    <div>
+                        <p class="mb-0">Drag and drop a file you want to upload</p>
+                        <p class="text-muted">Your video will be private until you publish it</p>
+                    </div>
+
+                    <div class="btn btn-primary btn-file">
+                        Select File
+                        <input type="file" id="videoFile" name="video">
+                    </div>
                 </div>
             </div>
         </div>
