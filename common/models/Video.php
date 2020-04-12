@@ -2,8 +2,10 @@
 
 namespace common\models;
 
+use Imagine\Image\Box;
 use Yii;
 use yii\helpers\FileHelper;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "{{%videos}}".
@@ -25,6 +27,8 @@ class Video extends \yii\db\ActiveRecord
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNLISTED = 0;
+
+    const THUMB_WIDTH = 1280;
 
     /**
      * @var \yii\web\UploadedFile
@@ -59,7 +63,7 @@ class Video extends \yii\db\ActiveRecord
             [['video_id'], 'unique'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             ['video', 'file', 'extensions' => ['mp4']],
-            ['thumbnail', 'image', 'minWidth' => 1280],
+            ['thumbnail', 'image', 'minWidth' => self::THUMB_WIDTH],
             ['status', 'default', 'value' => self::STATUS_UNLISTED]
         ];
     }
@@ -137,6 +141,10 @@ class Video extends \yii\db\ActiveRecord
                     FileHelper::createDirectory(dirname($thumbnailPath));
                 }
                 $this->thumbnail->saveAs($thumbnailPath);
+                Image::getImagine()
+                    ->open($thumbnailPath)
+                    ->thumbnail(new Box(self::THUMB_WIDTH, self::THUMB_WIDTH))
+                    ->save();
             }
         }
 
