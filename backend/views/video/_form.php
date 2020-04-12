@@ -24,7 +24,7 @@ use yii\bootstrap4\ActiveForm;
         </div>
         <div class="col-sm-4">
             <div class="embed-responsive embed-responsive-16by9">
-                <video class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"></video>
+                <video class="embed-responsive-item" src="<?php echo $model->getVideoUrl() ?>" controls></video>
             </div>
         </div>
     </div>

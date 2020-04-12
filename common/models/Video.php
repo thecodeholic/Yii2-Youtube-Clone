@@ -8,17 +8,17 @@ use yii\helpers\FileHelper;
 /**
  * This is the model class for table "{{%videos}}".
  *
- * @property string $video_id
+ * @property string      $video_id
  * @property string|null $title
  * @property string|null $description
  * @property string|null $tags
- * @property int|null $status
+ * @property int|null    $status
  * @property string|null $video_name
- * @property int|null $created_at
- * @property int|null $updated_at
- * @property int|null $created_by
+ * @property int|null    $created_at
+ * @property int|null    $updated_at
+ * @property int|null    $created_by
  *
- * @property User $createdBy
+ * @property User        $createdBy
  */
 class Video extends \yii\db\ActiveRecord
 {
@@ -93,22 +93,27 @@ class Video extends \yii\db\ActiveRecord
     public function save($runValidation = true, $attributeNames = null)
     {
         $isInsert = $this->isNewRecord;
-        if ($isInsert){
+        if ($isInsert) {
             $this->video_id = Yii::$app->security->generateRandomString(16);
         }
         $result = parent::save($runValidation, $attributeNames);
 
-        if (!$result){
+        if (!$result) {
             return $result;
         }
-        if ($isInsert){
-            $videoPath = Yii::getAlias('@frontend/web/storage/video/'.$this->video_id.'.mp4');
-            if (!is_dir(dirname($videoPath))){
+        if ($isInsert) {
+            $videoPath = Yii::getAlias('@frontend/web/storage/video/' . $this->video_id . '.mp4');
+            if (!is_dir(dirname($videoPath))) {
                 FileHelper::createDirectory(dirname($videoPath));
             }
             $this->video->saveAs($videoPath);
         }
 
         return $result;
+    }
+
+    public function getVideoUrl()
+    {
+        return 'http://freecodetube.test/storage/video/' . $this->video_id . '.mp4';
     }
 }
