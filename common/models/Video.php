@@ -114,6 +114,6 @@ class Video extends \yii\db\ActiveRecord
 
     public function getVideoUrl()
     {
-        return 'http://freecodetube.test/storage/video/' . $this->video_id . '.mp4';
+        return Yii::$app->params['frontendUrl'].'/storage/video/' . $this->video_id . '.mp4';
     }
 }
