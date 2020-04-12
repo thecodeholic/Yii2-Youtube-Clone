@@ -13,7 +13,9 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="video-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
 
     <div class="row">
         <div class="col-sm-8">
