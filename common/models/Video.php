@@ -100,5 +100,7 @@ class Video extends \yii\db\ActiveRecord
         if ($isInsert){
             $videoPath = Yii::getAlias('@frontend/web/storage/video/'.$this->video_id.'.mp4');
         }
+
+        return $result;
     }
 }

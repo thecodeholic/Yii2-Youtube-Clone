@@ -21,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-md-8">
             <div class="d-flex flex-column align-items-center justify-content-center">
+                <?php echo $form->errorSummary($model) ?>
+
                 <div class="upload-icon mb-4">
                     <i class="fas fa-upload"></i>
                 </div>
