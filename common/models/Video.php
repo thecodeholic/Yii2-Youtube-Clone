@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "{{%videos}}".
@@ -21,6 +22,9 @@ use Yii;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    /**
+     * @var \yii\web\UploadedFile
+     */
     public $video = null;
 
     /**
@@ -99,6 +103,10 @@ class Video extends \yii\db\ActiveRecord
         }
         if ($isInsert){
             $videoPath = Yii::getAlias('@frontend/web/storage/video/'.$this->video_id.'.mp4');
+            if (!is_dir(dirname($videoPath))){
+                FileHelper::createDirectory(dirname($videoPath));
+            }
+            $this->video->saveAs($videoPath);
         }
 
         return $result;
