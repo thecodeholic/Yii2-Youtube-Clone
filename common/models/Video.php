@@ -21,6 +21,8 @@ use Yii;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    public $video = null;
+
     /**
      * {@inheritdoc}
      */
@@ -43,6 +45,7 @@ class Video extends \yii\db\ActiveRecord
             [['video_name'], 'string', 'max' => 255],
             [['video_id'], 'unique'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
+            ['video', 'file', 'extensions' => ['mp4']]
         ];
     }
 
@@ -89,6 +92,13 @@ class Video extends \yii\db\ActiveRecord
         if ($isInsert){
             $this->video_id = Yii::$app->security->generateRandomString(16);
         }
-        return parent::save($runValidation, $attributeNames);
+        $result = parent::save($runValidation, $attributeNames);
+
+        if (!$result){
+            return $result;
+        }
+        if ($isInsert){
+            $videoPath = Yii::getAlias('@frontend/web/storage/video/'.$this->video_id.'.mp4');
+        }
     }
 }
