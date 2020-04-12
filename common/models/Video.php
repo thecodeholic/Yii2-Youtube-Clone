@@ -171,6 +171,9 @@ class Video extends \yii\db\ActiveRecord
 
     public function getThumbnailUrl()
     {
+        if (!$this->has_thumbnail){
+            return '';
+        }
         return Yii::$app->params['frontendUrl'].'/storage/thumb/' . $this->video_id . '.jpg';
     }
 }
