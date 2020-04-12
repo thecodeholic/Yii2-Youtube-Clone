@@ -7,9 +7,7 @@
 use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap4\Nav;
-use yii\bootstrap4\NavBar;
-use yii\widgets\Breadcrumbs;
-use common\widgets\Alert;
+use \yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -40,14 +38,14 @@ AppAsset::register($this);
             <ul class="navbar-nav ml-auto">
                 <?php if (Yii::$app->user->isGuest): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/site/login']) ?>">Login</a>
+                        <a class="nav-link" href="<?php echo Url::to(['/site/login']) ?>">Login</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#videoModal" data-toggle="modal">Create</a>
+                        <a class="nav-link" href="<?php echo Url::to(['/video/create']) ?>">Create</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/site/logout']) ?>"
+                        <a class="nav-link" href="<?php echo Url::to(['/site/logout']) ?>"
                            data-method="post">
                             Logout
                         </a>
@@ -56,37 +54,6 @@ AppAsset::register($this);
             </ul>
         </div>
     </nav>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body d-flex flex-column align-items-center justify-content-center">
-                    <div class="upload-icon mb-4">
-                        <i class="fas fa-upload"></i>
-                    </div>
-
-                    <div>
-                        <p class="mb-0">Drag and drop a file you want to upload</p>
-                        <p class="text-muted">Your video will be private until you publish it</p>
-                    </div>
-
-                    <div class="btn btn-primary btn-file">
-                        Select File
-                        <input type="file" id="videoFile" name="video">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <main class="d-flex">
         <aside style="min-width: 200px;">
