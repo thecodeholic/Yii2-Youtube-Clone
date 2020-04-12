@@ -57,6 +57,14 @@ class Video extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getStatusLabels()
+    {
+        return [
+            self::STATUS_PUBLISHED => 'Published',
+            self::STATUS_UNLISTED => 'Unlisted',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

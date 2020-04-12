@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Video;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
@@ -34,7 +35,7 @@ use yii\bootstrap4\ActiveForm;
                 <?php echo $model->video_name ?>
             </p>
 
-            <?= $form->field($model, 'status')->textInput() ?>
+            <?= $form->field($model, 'status')->dropDownList(Video::getStatusLabels()) ?>
         </div>
     </div>
 
