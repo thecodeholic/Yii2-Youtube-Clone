@@ -1,10 +1,9 @@
 /**
- * Created by TheCodeholic on 4/12/2020.
+ * Created by TheCodeholic on 4/17/2020.
  */
 $(function () {
   'use strict';
-  $('#videoFile').change((evt) => {
-    console.log("changed");
-    $(evt.target).closest('form')[0].submit()
-  });
+  $('#videoFile').change(ev => {
+    $(ev.target).closest('form').trigger('submit');
+  })
 });

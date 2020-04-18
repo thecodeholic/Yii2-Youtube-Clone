@@ -1,6 +1,5 @@
 <?php
 
-use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -14,32 +13,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin([
-        'options' => ['enctype' => 'multipart/form-data']
-    ]); ?>
+    <div class="d-flex flex-column justify-content-center align-items-center">
 
-    <div class="row">
-        <div class="col-md-8">
-            <div class="d-flex flex-column align-items-center justify-content-center">
-                <?php echo $form->errorSummary($model) ?>
-
-                <div class="upload-icon mb-4">
-                    <i class="fas fa-upload"></i>
-                </div>
-
-                <div>
-                    <p class="mb-0">Drag and drop a file you want to upload</p>
-                    <p class="text-muted">Your video will be private until you publish it</p>
-                </div>
-
-                <div class="btn btn-primary btn-file">
-                    Select File
-                    <input type="file" id="videoFile" name="video">
-                </div>
-            </div>
+        <div class="upload-icon">
+            <i class="fas fa-upload"></i>
         </div>
-    </div>
+        <br>
 
-    <?php ActiveForm::end(); ?>
+        <p class="m-0">Drag and drop a file you want to upload
+        <p>
+
+        <p class="text-muted">Your video will be private until you publish it</p>
+
+        <?php $form = \yii\bootstrap4\ActiveForm::begin([
+            'options' => ['enctype' => 'multipart/form-data']
+        ]) ?>
+
+        <?php echo $form->errorSummary($model) ?>
+
+        <button class="btn btn-primary btn-file">
+            Select File
+            <input type="file" id="videoFile" name="video">
+        </button>
+        <?php \yii\bootstrap4\ActiveForm::end() ?>
+    </div>
 
 </div>

@@ -1,53 +1,57 @@
 <?php
 
 /* @var $this yii\web\View */
+/** @var $latestVideo \common\models\Video */
+/** @var $numberOfView integer */
+/** @var $numberOfSubscribers integer */
+/** @var $subscribers \common\models\Subscriber[] */
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<div class="site-index d-flex">
+    <div class="card m-2" style="width: 14rem;">
+        <div class="embed-responsive embed-responsive-16by9 mb-3">
+            <video class="embed-responsive-item"
+                   poster="<?php echo $latestVideo->getThumbnailLink() ?>"
+                   src="<?php echo $latestVideo->getVideoLink() ?>"></video>
         </div>
-
+        <div class="card-body">
+            <h6 class="card-title"><?php echo $latestVideo->title ?></h6>
+            <p class="card-text">
+                Likes: <?php echo $latestVideo->getLikes()->count() ?><br>
+                Views: <?php echo $latestVideo->getViews()->count() ?>
+            </p>
+            <a href="<?php echo \yii\helpers\Url::to(['/video/update',
+                'id' => $latestVideo->video_id]) ?>"
+               class="btn btn-primary">
+                Edit
+            </a>
+        </div>
+    </div>
+    <div class="card m-2" style="width: 14rem;">
+        <div class="card-body">
+            <h6 class="card-title">Total Views</h6>
+            <p class="card-text" style="font-size: 48px">
+                <?php echo $numberOfView ?>
+            </p>
+        </div>
+    </div>
+    <div class="card m-2" style="width: 14rem;">
+        <div class="card-body">
+            <h6 class="card-title">Total Subscribers</h6>
+            <p class="card-text" style="font-size: 48px">
+                <?php echo $numberOfSubscribers ?>
+            </p>
+        </div>
+    </div>
+    <div class="card m-2" style="width: 14rem;">
+        <div class="card-body">
+            <h6 class="card-title">Latest Subscribers</h6>
+            <?php foreach ($subscribers as $subscriber): ?>
+                <div>
+                    <?php echo $subscriber->user->username ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
 </div>

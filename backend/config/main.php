@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'language' => 'en-US',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -37,12 +38,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'video/update/<id>' => 'video/update'
             ],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true
+        ]
+
     ],
     'params' => $params,
 ];

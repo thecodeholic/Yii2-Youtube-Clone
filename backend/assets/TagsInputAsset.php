@@ -1,8 +1,8 @@
 <?php
 /**
  * User: TheCodeholic
- * Date: 4/12/2020
- * Time: 3:48 PM
+ * Date: 4/17/2020
+ * Time: 11:12 AM
  */
 
 namespace backend\assets;
@@ -24,9 +24,11 @@ class TagsInputAsset extends AssetBundle
     public $css = [
         'tagsinput.css'
     ];
+
     public $js = [
         'tagsinput.js'
     ];
+
     public $depends = [
         JqueryAsset::class
     ];

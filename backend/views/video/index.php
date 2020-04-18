@@ -24,29 +24,30 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'video_id',
+                'attribute' => 'title',
                 'content' => function ($model) {
-                    return $this->render('_video_item', [
-                        'model' => $model
-                    ]);
+                    return $this->render('_video_item', ['model' => $model]);
                 }
             ],
             [
                 'attribute' => 'status',
                 'content' => function ($model) {
-                    return \common\models\Video::getStatusLabels()[$model->status];
+                    return $model->getStatusLabels()[$model->status];
                 }
             ],
+            //'has_thumbnail',
             //'video_name',
             'created_at:datetime',
             'updated_at:datetime',
+            //'created_by',
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'delete' => function ($url) {
                         return Html::a('Delete', $url, [
                             'data-method' => 'post',
-                            'data-confirm' => 'You cannot undo this. Are you sure?'
+                            'data-confirm' => 'Are you sure?'
                         ]);
                     }
                 ]

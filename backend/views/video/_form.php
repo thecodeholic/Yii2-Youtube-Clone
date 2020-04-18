@@ -1,12 +1,11 @@
 <?php
 
-use common\models\Video;
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Video */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap4\ActiveForm */
 
 \backend\assets\TagsInputAsset::register($this);
 ?>
@@ -20,46 +19,50 @@ use yii\bootstrap4\ActiveForm;
     <div class="row">
         <div class="col-sm-8">
 
-            <div class="form-group">
-                <label>Thumbnail</label>
-                <div class="custom-file">
-                    <input type="file"
-                           class="custom-file-input<?php echo $model->hasErrors('thumbnail') ? ' is-invalid' : '' ?>"
-                           id="thumbnail" name="thumbnail">
-                    <label class="custom-file-label" for="thumbnail">Choose file</label>
-                    <div class="invalid-feedback"><?php echo $model->getFirstError('thumbnail') ?></div>
-                </div>
-            </div>
+            <?php echo $form->errorSummary($model) ?>
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
+            <div class="form-group">
+                <label><?php echo $model->getAttributeLabel('thumbnail') ?></label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input"
+                           id="thumbnail" name="thumbnail">
+                    <label class="custom-file-label" for="thumbnail">Choose file</label>
+                </div>
+            </div>
+
             <?= $form->field($model, 'tags', [
                 'inputOptions' => ['data-role' => 'tagsinput']
-            ])->textInput() ?>
+            ])->textInput(['maxlength' => true]) ?>
+
         </div>
         <div class="col-sm-4">
-            <div class="embed-responsive embed-responsive-16by9">
+
+            <div class="embed-responsive embed-responsive-16by9 mb-3">
                 <video class="embed-responsive-item"
-                       poster="<?php echo $model->getThumbnailUrl() ?>"
-                       src="<?php echo $model->getVideoUrl() ?>" controls>
-                </video>
+                       poster="<?php echo $model->getThumbnailLink() ?>"
+                       src="<?php echo $model->getVideoLink() ?>"
+                       controls></video>
             </div>
-            <p class="mt-3">
-                <a href="<?php echo $model->getVideoUrl() ?>" target="_blank">
+
+            <div class="mb-3">
+                <div class="text-muted">Video Link</div>
+                <a href="<?php echo $model->getVideoLink() ?>">
                     Open Video
                 </a>
-            </p>
-            <p class="mt-3">
-                <small>Video name</small><br>
-                <?php echo $model->video_name ?>
-            </p>
+            </div>
 
-            <?= $form->field($model, 'status')->dropDownList(Video::getStatusLabels()) ?>
+            <div class="mb-3">
+                <div class="text-muted">Video Name</div>
+                <?php echo $model->video_name ?>
+            </div>
+
+            <?= $form->field($model, 'status')->dropDownList($model->getStatusLabels()) ?>
         </div>
     </div>
-
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

@@ -3,10 +3,20 @@ body {
     height: 100%;
 }
 
+main {
+    flex: 1;
+}
+.content-wrapper{
+    flex: 1;
+}
+aside{
+    min-width: 200px;
+}
 aside .nav-pills .nav-link {
     border-radius: 0;
     color: #444444;
 }
+
 
 aside .nav-pills .nav-link:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -18,9 +28,6 @@ aside .nav-pills .nav-link.active {
     border-left: 4px solid #b90000;
 }
 
-#videoModal .modal-content {
-    height: 70vh;
-}
 
 .upload-icon {
     width: 200px;
@@ -37,7 +44,6 @@ aside .nav-pills .nav-link.active {
 .btn-file {
     position: relative;
 }
-
 .btn-file input {
     position: absolute;
     left: 0;

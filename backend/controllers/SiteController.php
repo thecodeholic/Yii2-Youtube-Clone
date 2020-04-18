@@ -1,6 +1,10 @@
 <?php
+
 namespace backend\controllers;
 
+use common\models\Subscriber;
+use common\models\Video;
+use common\models\VideoView;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -60,7 +64,40 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $user = Yii::$app->user->identity;
+        $userId = $user->id;
+        $latestVideo = Video::find()
+            ->latest()
+            ->creator($userId)
+            ->limit(1)
+            ->one();
+        $numberOfView = VideoView::find()
+            ->alias('vv')
+            ->innerJoin(Video::tableName() . ' v',
+                'v.video_id = vv.video_id')
+            ->andWhere(['v.created_by' => $userId])
+            ->count();
+
+        $numberOfSubscribers = Yii::$app->cache->get('subscribers-'.$userId);
+        if (!$numberOfSubscribers) {
+            $numberOfSubscribers = $user->getSubscribers()->count();
+            Yii::$app->cache->set('subscribers-'.$userId, $numberOfSubscribers);
+        }
+
+
+        $subscribers = Subscriber::find()
+            ->with('user')
+            ->andWhere(['channel_id' => $userId])
+            ->orderBy('created_at DESC')
+            ->limit(3)
+            ->all();
+
+        return $this->render('index', [
+            'latestVideo' => $latestVideo,
+            'numberOfView' => $numberOfView,
+            'numberOfSubscribers' => $numberOfSubscribers,
+            'subscribers' => $subscribers,
+        ]);
     }
 
     /**
@@ -70,6 +107,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'auth';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
