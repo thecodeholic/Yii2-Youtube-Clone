@@ -39,3 +39,13 @@ With Composer installed, navigate to the project folder from command line and ru
 
 Follow the steps from [yii2 advanced template](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md#preparing-application)
 to prepare installation.
+
+After doing all the steps from [yii2 advanced template](https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md#preparing-application)
+open `common/config/params-local.php` and add your frontend domain on key `frontendUrl`. 
+Example:
+
+```php
+return [
+    'frontendUrl' => 'http://frontend.test/'
+];
+```
