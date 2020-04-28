@@ -6,7 +6,7 @@
     <br>
 </p>
 
-#### The project was created while recording video "Yii2 framework full course - Building Youtube Clone"
+#### The project was created while recording [video for FreeCodeCamp](https://youtu.be/whuIf33v2Ug)
 
 Installation
 ============
