@@ -11,7 +11,10 @@ use yii\bootstrap4\NavBar;
 NavBar::begin([
     'brandLabel' => Yii::$app->name,
     'brandUrl' => Yii::$app->homeUrl,
-    'options' => ['class' => 'navbar-expand-lg navbar-light bg-light shadow-sm']
+    'options' => ['class' => 'navbar-expand-lg navbar-light bg-light shadow-sm'],
+    'innerContainerOptions' => [
+        'class' => 'container-fluid'
+    ]
 ]);
 $menuItems = [
     ['label' => 'Create', 'url' => ['/video/create']],
