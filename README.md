@@ -8,6 +8,30 @@
 
 #### The project was created while recording [video for FreeCodeCamp](https://youtu.be/whuIf33v2Ug)
 
+Several Features
+================
+
+ - Login and Registration
+ - Email confirmation
+ - Upload videos
+ - Provide thumbnail, title, description, tags
+ - Status of the video: Published or Unlisted
+ - Dashboard with analitics: 
+    - Latest video
+    - Number of total views
+    - Number of total subscribers
+    - Latest subscribers
+
+On Frontend
+ - View videos
+ - Leave a like/dislike
+ - Find similar videos
+ - Channel page
+ - Subscribe on channel or unsubscribe
+ - Sending email when user subscribes to channel
+ - Global search to search videos by title, description or tags
+ - History page
+
 Installation
 ============
 
