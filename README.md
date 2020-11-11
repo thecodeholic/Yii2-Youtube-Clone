@@ -8,7 +8,7 @@
 
 #### The project was created while recording [video for FreeCodeCamp](https://youtu.be/whuIf33v2Ug)
 
-Several Features
+Features
 ================
 
  - Login and Registration
@@ -31,6 +31,11 @@ On Frontend
  - Sending email when user subscribes to channel
  - Global search to search videos by title, description or tags
  - History page
+
+Demo
+====
+
+If you want to see working demo of the application [click here](https://freecodetube.thecodeholic.com/)
 
 Installation
 ============
