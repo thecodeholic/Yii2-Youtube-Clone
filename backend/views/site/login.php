@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap4\ActiveForm */
+
 /* @var $model \common\models\LoginForm */
 
 use yii\helpers\Html;
@@ -11,13 +12,25 @@ $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <div class="container">
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+        <h1><?= Html::encode($this->title) ?></h1>
+        <div class="alert alert-secondary">
+            <h4>Try to login with these accounts <br></h4>
+            Username: carpetmotion <br>
+            Password: carpetmotion <br> <br>
+            Username: fivestubbs <br>
+            Password: fivestubbs <br> <br>
+            Username: captainfalling <br>
+            Password: captainfalling <br><br>
+        </div>
+
+        <p>Please fill out the following fields to login:</p>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
@@ -29,7 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
-            <?php ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
+            </div>
         </div>
     </div>
 </div>
