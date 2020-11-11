@@ -11,7 +11,8 @@
 Several Features
 ================
 
-On Backend
+ - Login and Registration
+ - Email confirmation
  - Upload videos
  - Provide thumbnail, title, description, tags
  - Status of the video: Published or Unlisted
@@ -27,6 +28,7 @@ On Frontend
  - Find similar videos
  - Channel page
  - Subscribe on channel or unsubscribe
+ - Sending email when user subscribes to channel
  - Global search to search videos by title, description or tags
  - History page
 
