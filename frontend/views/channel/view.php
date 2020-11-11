@@ -10,6 +10,8 @@ use yii\helpers\Url;
 /** @var $this \yii\web\View */
 /** @var $channel \common\models\User */
 /**@var $dataProvider \yii\data\ActiveDataProvider */
+
+$this->title = 'Channel ' . $channel->username . ' | ' . Yii::$app->name;
 ?>
 
 <div class="jumbotron">

@@ -11,6 +11,7 @@ use yii\helpers\Url;
 /** @var $model \common\models\Video */
 /** @var $similarVideos \common\models\Video[] */
 
+$this->title = $model->title. ' | ' . Yii::$app->name;
 ?>
 <div class="row">
     <div class="col-sm-8">
@@ -46,11 +47,11 @@ use yii\helpers\Url;
             <div class="media mb-3">
                 <a href="<?php echo Url::to(['/video/view', 'id' => $similarVideo->video_id]) ?>">
                     <div class="embed-responsive embed-responsive-16by9 mr-2"
-                     style="width: 120px">
-                    <video class="embed-responsive-item"
-                           poster="<?php echo $similarVideo->getThumbnailLink() ?>"
-                           src="<?php echo $similarVideo->getVideoLink() ?>"></video>
-                </div>
+                         style="width: 120px">
+                        <video class="embed-responsive-item"
+                               poster="<?php echo $similarVideo->getThumbnailLink() ?>"
+                               src="<?php echo $similarVideo->getVideoLink() ?>"></video>
+                    </div>
                 </a>
                 <div class="media-body">
                     <h6 class="m-0"><?php echo $similarVideo->title ?></h6>

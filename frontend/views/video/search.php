@@ -5,6 +5,8 @@
  * Time: 11:56 AM
  */
 /** @var $dataProvider \yii\data\ActiveDataProvider */
+
+$this->title = 'Search videos | '. Yii::$app->name;
 ?>
 <h1>Found videos</h1>
 <?php echo \yii\widgets\ListView::widget([
