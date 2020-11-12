@@ -30,3 +30,37 @@ aside .nav-pills .nav-link.active {
 .content-wrapper{
     margin-bottom: 200px;
 }
+
+.create-comment .action-buttons {
+    display: none;
+}
+.create-comment.focused .action-buttons {
+    display: block;
+}
+
+.comment-item {
+    position: relative;
+}
+
+.comment-avatar {
+    width: 50px;
+}
+.comment-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.comment-actions .dropdown-toggle:after {
+    display: none;
+}
+
+.comment-item .comment-edit-section {
+    display: none;
+}
+
+.comment-item.edit .comment-text {
+    display: none;
+}
+.comment-item.edit .comment-edit-section {
+    display: block;
+}

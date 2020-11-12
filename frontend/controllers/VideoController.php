@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 
+use common\models\Comment;
 use common\models\Video;
 use common\models\VideoLike;
 use common\models\VideoView;
@@ -79,8 +80,15 @@ class VideoController extends Controller
             ->limit(10)
             ->all();
 
+        $comments = Comment::find()
+            ->with(['createdBy'])
+            ->videoId($id)
+            ->latest()
+            ->all();
+
         return $this->render('view', [
             'model' => $video,
+            'comments' => $comments,
             'similarVideos' => $similarVideos
         ]);
     }

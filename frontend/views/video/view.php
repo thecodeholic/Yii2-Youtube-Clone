@@ -8,10 +8,12 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/** @var $this \yii\web\View */
 /** @var $model \common\models\Video */
 /** @var $similarVideos \common\models\Video[] */
+/** @var $comments \common\models\Comment[] */
 
-$this->title = $model->title. ' | ' . Yii::$app->name;
+$this->title = $model->title . ' | ' . Yii::$app->name;
 ?>
 <div class="row">
     <div class="col-sm-8">
@@ -40,6 +42,35 @@ $this->title = $model->title. ' | ' . Yii::$app->name;
                 <?php echo \common\helpers\Html::channelLink($model->createdBy) ?>
             </p>
             <?php echo Html::encode($model->description) ?>
+        </div>
+        <div class="comments mt-5">
+            <h4 class="mb-3"> <span id="comment-count"><?php echo count($comments) ?></span> Comments</h4>
+            <div class="create-comment mb-4">
+                <div class="media">
+                    <img class="mr-3 comment-avatar" src="/img/avatar.svg" alt="">
+                    <div class="media-body">
+                        <form id="create-comment-form" method="post" action="<?php echo Url::to(['/comment/create']) ?>"
+                              data-pjax="1">
+                            <input type="hidden" name="video_id" value="<?php echo $model->video_id ?>">
+                            <textarea id="leave-comment" rows="1"
+                                      class="form-control"
+                                      name="comment"
+                                      placeholder="Add a public comment"></textarea>
+                            <div class="action-buttons text-right mt-2">
+                                <button type="button" id="cancel-comment" class="btn btn-light">Cancel</button>
+                                <button id="submit-comment" class="btn btn-primary">Comment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="comments-wrapper" class="comments-wrapper">
+                <?php foreach ($comments as $comment) {
+                    echo $this->render('_comment_item', [
+                        'model' => $comment,
+                    ]);
+                } ?>
+            </div>
         </div>
     </div>
     <div class="col-sm-4">
