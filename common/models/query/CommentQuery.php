@@ -37,8 +37,13 @@ class CommentQuery extends \yii\db\ActiveQuery
         return $this->andWhere(['video_id' => $videoId]);
     }
 
+    public function parent()
+    {
+        return $this->andWhere(['parent_id' => null]);
+    }
+
     public function latest()
     {
-        return $this->orderBy(['created_at' => SORT_DESC]);
+        return $this->orderBy("pinned DESC, created_at DESC");
     }
 }

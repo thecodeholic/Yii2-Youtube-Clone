@@ -66,14 +66,14 @@ class Comment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'comment' => Yii::t('common', 'Comment'),
-            'video_id' => Yii::t('common', 'Video ID'),
-            'parent_id' => Yii::t('common', 'Parent ID'),
-            'pinned' => Yii::t('common', 'Pinned'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
-            'created_by' => Yii::t('common', 'Created By'),
+            'id' => 'ID',
+            'comment' => 'Comment',
+            'video_id' => 'Video ID',
+            'parent_id' => 'Parent ID',
+            'pinned' => 'Pinned',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'created_by' => 'Created By',
         ];
     }
 

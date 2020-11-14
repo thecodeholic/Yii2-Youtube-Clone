@@ -49,16 +49,15 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
                 <div class="media">
                     <img class="mr-3 comment-avatar" src="/img/avatar.svg" alt="">
                     <div class="media-body">
-                        <form id="create-comment-form" method="post" action="<?php echo Url::to(['/comment/create']) ?>"
-                              data-pjax="1">
+                        <form class="create-comment-form" method="post" action="<?php echo Url::to(['/comment/create']) ?>">
                             <input type="hidden" name="video_id" value="<?php echo $model->video_id ?>">
-                            <textarea id="leave-comment" rows="1"
+                            <textarea rows="1"
                                       class="form-control"
                                       name="comment"
                                       placeholder="Add a public comment"></textarea>
                             <div class="action-buttons text-right mt-2">
-                                <button type="button" id="cancel-comment" class="btn btn-light">Cancel</button>
-                                <button id="submit-comment" class="btn btn-primary">Comment</button>
+                                <button type="button" class="btn btn-light btn-cancel">Cancel</button>
+                                <button class="btn btn-primary btn-save">Comment</button>
                             </div>
                         </form>
                     </div>

@@ -6,12 +6,15 @@ body {
 main {
     flex: 1;
 }
-.content-wrapper{
+
+.content-wrapper {
     flex: 1;
 }
-aside{
+
+aside {
     min-width: 200px;
 }
+
 aside .nav-pills .nav-link {
     border-radius: 0;
     color: #444444;
@@ -27,13 +30,15 @@ aside .nav-pills .nav-link.active {
     color: #b90000;
     border-left: 4px solid #b90000;
 }
-.content-wrapper{
+
+.content-wrapper {
     margin-bottom: 200px;
 }
 
 .create-comment .action-buttons {
     display: none;
 }
+
 .create-comment.focused .action-buttons {
     display: block;
 }
@@ -45,22 +50,29 @@ aside .nav-pills .nav-link.active {
 .comment-avatar {
     width: 50px;
 }
+
+.sub-comments .comment-avatar {
+    width: 24px;
+}
+
 .comment-actions {
     position: absolute;
     right: 0;
     top: 0;
 }
+
 .comment-actions .dropdown-toggle:after {
     display: none;
 }
 
-.comment-item .comment-edit-section {
+.comment-item .media-input {
     display: none;
 }
 
-.comment-item.edit .comment-text {
+.comment-item.edit .media-comment {
     display: none;
 }
-.comment-item.edit .comment-edit-section {
-    display: block;
+
+.comment-item.edit .media-input {
+    display: flex;
 }
