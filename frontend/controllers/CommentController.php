@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 
 use common\models\Comment;
+use common\models\User;
 use yii\filters\AccessControl;
 use yii\filters\ContentNegotiator;
 use yii\filters\VerbFilter;
@@ -54,9 +55,10 @@ class CommentController extends Controller
         ];
     }
 
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $comment = new Comment();
+        $comment->video_id = $id;
         if ($comment->load(\Yii::$app->request->post(), '') && $comment->save()) {
             return [
                 'success' => true,
@@ -75,7 +77,7 @@ class CommentController extends Controller
     public function actionDelete($id)
     {
         $comment = $this->findModel($id);
-        if ($comment->belongsTo(\Yii::$app->user->id)) {
+        if ($comment->belongsTo(\Yii::$app->user->id) || $comment->video->belongsTo(\Yii::$app->user->id)) {
             $comment->delete();
 
             return ['success' => true];
@@ -111,10 +113,46 @@ class CommentController extends Controller
         $parentId = \Yii::$app->request->post('parent_id');
         $parentComment = $this->findModel($parentId);
 
+        $commentText = \Yii::$app->request->post('comment');
+        $mentionUsername = \Yii::$app->request->post('mention');
+        if (strpos($commentText, '@' . $mentionUsername) !== 0) {
+            $mentionUsername = null;
+        } else {
+            $commentText = trim(str_replace('@' . $mentionUsername, '', $commentText));
+        }
+
+        if ($mentionUsername) {
+            $mentionUser = User::findByUsername($mentionUsername);
+            if (!$mentionUser) {
+                $mentionUsername = null;
+            } else {
+                $currentUser = \Yii::$app->user->identity;
+                \Yii::$app->mailer->compose([
+                    'html' => 'mention-html', 'text' => 'mention-text'
+                ], [
+                    'comment' => $commentText,
+                    'channel' => $mentionUser,
+                    'user' => $currentUser
+                ])
+                    ->setFrom(\Yii::$app->params['senderEmail'])
+                    ->setTo($mentionUser->email)
+                    ->setSubject('User '.$currentUser->username.' mention you in a comment')
+                    ->send();
+            }
+        }
+
         $comment = new Comment();
-        $comment->comment = \Yii::$app->request->post('comment');
+        $comment->comment = $commentText;
+        $comment->mention = $mentionUsername;
         $comment->video_id = $parentComment->video_id;
-        $comment->parent_id = $parentId;
+
+        if ($parentComment->parent_id) {
+            $comment->parent_id = $parentComment->parent_id;
+        } else {
+            $comment->parent_id = $parentId;
+        }
+
+
         if ($comment->save()) {
             return [
                 'success' => true,
@@ -136,7 +174,7 @@ class CommentController extends Controller
 
         $finalContent = "";
         foreach ($parentComment->comments as $comment) {
-            $finalContent .=  $this->renderPartial('@frontend/views/video/_comment_item', [
+            $finalContent .= $this->renderPartial('@frontend/views/video/_comment_item', [
                 'model' => $comment,
             ]);
         }
@@ -151,7 +189,7 @@ class CommentController extends Controller
     {
         $comment = $this->findModel($id);
         if ($comment->video->belongsTo(\Yii::$app->user->id)) {
-            if ($comment->pinned){
+            if ($comment->pinned) {
                 $comment->pinned = 0;
             } else {
                 Comment::updateAll(['pinned' => 0], ['video_id' => $comment->video]);
@@ -165,6 +203,7 @@ class CommentController extends Controller
                     ])
                 ];
             }
+
             return [
                 'success' => false,
                 'errors' => $comment->errors

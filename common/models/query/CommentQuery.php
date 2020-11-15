@@ -2,6 +2,9 @@
 
 namespace common\models\query;
 
+use common\models\Comment;
+use common\models\Video;
+
 /**
  * This is the ActiveQuery class for [[\common\models\Comment]].
  *
@@ -45,5 +48,11 @@ class CommentQuery extends \yii\db\ActiveQuery
     public function latest()
     {
         return $this->orderBy("pinned DESC, created_at DESC");
+    }
+
+    public function byChannel($userId)
+    {
+        return $this->innerJoin(Video::tableName() . ' v', 'v.video_id = ' . Comment::tableName() . '.video_id')
+            ->andWhere(['v.created_by' => $userId]);
     }
 }

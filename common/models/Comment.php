@@ -14,6 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $video_id
  * @property int|null $parent_id
  * @property int|null $pinned
+ * @property string $mention
  * @property int|null $created_at
  * @property int|null $updated_at
  * @property int|null $created_by
@@ -54,6 +55,7 @@ class Comment extends \yii\db\ActiveRecord
             [['comment'], 'string'],
             [['parent_id', 'pinned', 'created_at', 'updated_at', 'created_by'], 'integer'],
             [['video_id'], 'string', 'max' => 16],
+            [['mention'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Comment::className(), 'targetAttribute' => ['parent_id' => 'id']],
             [['video_id'], 'exist', 'skipOnError' => true, 'targetClass' => Video::className(), 'targetAttribute' => ['video_id' => 'video_id']],
@@ -71,6 +73,7 @@ class Comment extends \yii\db\ActiveRecord
             'video_id' => 'Video ID',
             'parent_id' => 'Parent ID',
             'pinned' => 'Pinned',
+            'mention' => 'Mention',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',

@@ -13,11 +13,17 @@ $(function () {
           data: $createCommentForm.serializeArray(),
           success: function (res) {
             if (res.success) {
-              $commentsWrapper.prepend(res.comment);
+              const $pinnedComment = $commentsWrapper.find('.pinned-comment');
+              const $tmp = $(res.comment);
+              if ($pinnedComment.length) {
+                $tmp.insertAfter($pinnedComment);
+              } else {
+                $commentsWrapper.prepend($tmp);
+              }
+
               resetForm();
               $commentCount.text(parseInt($commentCount.text()) + 1);
-              const $firstComment = $commentsWrapper.find('.comment-item').eq(0);
-              initComment($firstComment);
+              initComment($tmp);
             }
           }
         })
@@ -81,9 +87,11 @@ $(function () {
     const $replySection = $comment.find('.reply-section');
     const $subCommentsSection = $comment.find('.sub-comments');
     const $viewSubComments = $comment.find('.view-sub-comments');
+    const $channelLink = $comment.find('.channel-link');
     let replyFormDisplayed = false;
     let commentsLoaded = false;
     let commentsCollapsed = true;
+    let mentionUsername = null;
 
     $pin.on('click', onCommentPin)
 
@@ -96,6 +104,7 @@ $(function () {
     });
 
     $cancel.on('click', ev => {
+      mentionUsername = null;
       $comment.removeClass('edit');
     });
 
@@ -118,7 +127,6 @@ $(function () {
           return;
         }
       }
-
 
       $.ajax({
         method: 'post',
@@ -157,6 +165,8 @@ $(function () {
     }
 
     function onReplyClick(ev) {
+      const isParentComment = !$comment.data('parent-id');
+
       if (replyFormDisplayed) {
         return;
       }
@@ -164,6 +174,12 @@ $(function () {
       $replySection.append($newForm);
       const $textarea = $newForm.find('textarea');
       replyFormDisplayed = true;
+
+      if (!isParentComment) {
+        mentionUsername = $channelLink.text()
+        $textarea.val('@' + mentionUsername + ' ');
+        $textarea[0].focus();
+      }
 
       $textarea.click(ev => {
         ev.stopImmediatePropagation();
@@ -178,19 +194,31 @@ $(function () {
             replyFormDisplayed = false;
           },
           () => {
+            const value = $textarea.val();
+            if (value.indexOf('@'+mentionUsername) !== 0) {
+              mentionUsername = null;
+            }
             $.ajax({
               method: 'post',
               url: $reply.data('action'),
               data: {
-                comment: $textarea.val(),
+                comment: value,
+                mention: mentionUsername,
                 parent_id: $reply.closest('.comment-item').data('id')
               },
               success: (res) => {
                 console.log(res);
                 if (res.success) {
-                  $subCommentsSection.append(res.comment);
                   $newForm.remove();
                   replyFormDisplayed = false;
+
+                  let $parentSubCommentSection = $subCommentsSection;
+                  if ($comment.closest('.sub-comments').length) {
+                    $parentSubCommentSection = $comment.closest('.sub-comments');
+                  }
+                  $parentSubCommentSection.append(res.comment);
+                  const $lastComment = $parentSubCommentSection.find('>.comment-item').last();
+                  initComment($lastComment);
                 } else {
                   const commentErrors = res.errors.comment;
                   if (commentErrors) {

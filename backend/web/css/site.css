@@ -54,3 +54,11 @@ aside .nav-pills .nav-link.active {
     height: 100%;
     opacity: 0;
 }
+
+.comment-wrapper {
+    flex: 1;
+}
+
+.comment-wrapper .dropdown-toggle::after {
+    content: none;
+}

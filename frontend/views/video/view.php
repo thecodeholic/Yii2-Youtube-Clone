@@ -49,10 +49,11 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
                 <div class="media">
                     <img class="mr-3 comment-avatar" src="/img/avatar.svg" alt="">
                     <div class="media-body">
-                        <form class="create-comment-form" method="post" action="<?php echo Url::to(['/comment/create']) ?>">
+                        <form class="create-comment-form" method="post"
+                              action="<?php echo Url::to(['/comment/create', 'id' => $model->video_id]) ?>">
                             <input type="hidden" name="video_id" value="<?php echo $model->video_id ?>">
                             <textarea rows="1"
-                                      class="form-control"
+                                      class="form-control comment-input"
                                       name="comment"
                                       placeholder="Add a public comment"></textarea>
                             <div class="action-buttons text-right mt-2">

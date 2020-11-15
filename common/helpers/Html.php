@@ -22,6 +22,6 @@ class Html
     {
         return \yii\helpers\Html::a($user->username,
             Url::to(['/channel/view', 'username' => $user->username], $schema),
-            ['class' => 'text-dark']);
+            ['class' => 'text-dark channel-link']);
     }
 }

@@ -10,7 +10,7 @@
 $subCommentCount = $model->getComments()->count();
 ?>
 
-<div class="comment-item" data-id="<?php echo $model->id ?>">
+<div class="comment-item <?php echo $model->pinned ? 'pinned-comment' : ''?>" data-parent-id="<?php echo $model->parent_id ?>" data-id="<?php echo $model->id ?>">
     <div class="media media-comment">
         <img class="mr-3 comment-avatar" src="/img/avatar.svg" alt="">
         <div class="media-body">
@@ -30,6 +30,9 @@ $subCommentCount = $model->getComments()->count();
             </h6>
             <div class="comment-text">
                 <div class="text-wrapper">
+                    <?php if ($model->mention): ?>
+                        <span class="badge bg-info"><?php echo '@'.$model->mention ?></span>
+                    <?php endif; ?>
                     <?php echo $model->comment ?>
                 </div>
 
