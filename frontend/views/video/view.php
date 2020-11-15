@@ -44,7 +44,7 @@ $this->title = $model->title . ' | ' . Yii::$app->name;
             <?php echo Html::encode($model->description) ?>
         </div>
         <div class="comments mt-5">
-            <h4 class="mb-3"> <span id="comment-count"><?php echo count($comments) ?></span> Comments</h4>
+            <h4 class="mb-3"> <span id="comment-count"><?php echo $model->getComments()->count() ?></span> Comments</h4>
             <div class="create-comment mb-4">
                 <div class="media">
                     <img class="mr-3 comment-avatar" src="/img/avatar.svg" alt="">

@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'pager' => [
             'class' => \yii\bootstrap4\LinkPager::class
         ],
-        'layout' => '<div class="mb-3">{summary}</div>{items}{pager}'
+        'layout' => '<div class="mt-4">{items}</div>{pager}'
     ]); ?>
 
 

@@ -42,6 +42,7 @@ class CommentSearch extends Comment
     {
         $query = Comment::find()
             ->with('video')
+            ->parent()
             ->byChannel($userId)
             ->latest();
 

@@ -80,9 +80,9 @@ class VideoController extends Controller
             ->limit(10)
             ->all();
 
-        $comments = Comment::find()
+        $comments = $video
+            ->getComments()
             ->with(['createdBy'])
-            ->videoId($id)
             ->parent()
             ->latest()
             ->all();

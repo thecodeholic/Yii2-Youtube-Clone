@@ -146,6 +146,14 @@ class Video extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \common\models\query\CommentQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::class, ['video_id' => 'video_id']);
+    }
+
+    /**
      * {@inheritdoc}
      * @return \common\models\query\VideoQuery the active query used by this AR class.
      */

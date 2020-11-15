@@ -219,6 +219,8 @@ $(function () {
                   $parentSubCommentSection.append(res.comment);
                   const $lastComment = $parentSubCommentSection.find('>.comment-item').last();
                   initComment($lastComment);
+
+                  $commentCount.text(parseInt($commentCount.text()) + 1);
                 } else {
                   const commentErrors = res.errors.comment;
                   if (commentErrors) {
